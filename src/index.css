@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    @apply bg-coal-950 text-ash-200 font-body antialiased;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+  ::selection { @apply bg-blood-700 text-white; }
+}
+
+@layer components {
+  .panel {
+    @apply relative border border-coal-600/80 bg-coal-900/80 backdrop-blur-sm;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), 0 10px 30px -10px rgba(0,0,0,0.8);
+  }
+  .panel::before, .panel::after {
+    content: ''; position: absolute; width: 10px; height: 10px; border-color: rgba(201,35,42,0.7); pointer-events: none;
+  }
+  .panel::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+  .panel::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+  .label { @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ash-400; }
+  .title { @apply font-display uppercase tracking-[0.08em] text-ash-100; }
+
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2 border px-4 py-3 font-display text-sm uppercase
+      tracking-[0.14em] transition duration-150 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-red { @apply btn border-blood-500 bg-blood-700/80 text-white hover:bg-blood-600 shadow-[0_0_24px_-6px_rgba(201,35,42,0.8)]; }
+  .btn-ghost { @apply btn border-coal-500 bg-coal-800/70 text-ash-200 hover:border-ash-400 hover:text-white; }
+  .btn-warn { @apply btn border-warn-500 bg-warn-600/30 text-warn-400 hover:bg-warn-600/50; }
+  .btn-safe { @apply btn border-safe-500 bg-safe-600/30 text-safe-400 hover:bg-safe-600/50; }
+
+  .chip { @apply inline-flex items-center gap-1 border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider; }
+  .sev-normal { @apply border-safe-600/60 text-safe-400 bg-safe-600/10; }
+  .sev-odd { @apply border-warn-500/60 text-warn-400 bg-warn-600/10; }
+  .sev-alarming { @apply border-blood-500/70 text-blood-400 bg-blood-700/20; }
+
+  .input {
+    @apply w-full border border-coal-500 bg-coal-950/80 px-3 py-3 font-mono text-ash-100 outline-none placeholder:text-coal-500
+      focus:border-blood-500 focus:shadow-[0_0_0_3px_rgba(201,35,42,0.2)];
+  }
+}
+
+.scanlines {
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 2px, transparent 4px);
+}
+.vignette { background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.85) 100%); }
+.noise {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+  opacity: 0.06; mix-blend-mode: overlay;
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+@keyframes breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.2%); } }
+@keyframes rainfall { from { background-position: 0 0; } to { background-position: -38px 120px; } }

@@ -1,0 +1,8 @@
+# Minimal Supabase CLI config. `supabase start` fills in defaults for everything else.
+project_id = "the-last-checkpoint"
+
+[auth]
+enable_anonymous_sign_ins = true
+
+[functions.game]
+verify_jwt = true
